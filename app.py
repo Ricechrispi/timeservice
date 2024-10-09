@@ -20,7 +20,13 @@ from shapely import Point
 import sys
 import logging
 
+# setup logging
+file_handler = logging.FileHandler(filename="app.log")
+stdout_handler = logging.StreamHandler(stream=sys.stdout)
+logging.basicConfig(handlers=[file_handler, stdout_handler], level=logging.ERROR)
 logger = logging.getLogger(__name__)
+
+# setup flask
 app = Flask(__name__)
 
 
@@ -155,7 +161,4 @@ def timezones():
 
 
 if __name__ == "__main__":
-    file_handler = logging.FileHandler(filename="app.log")
-    stdout_handler = logging.StreamHandler(stream=sys.stdout)
-    logging.basicConfig(handlers=[file_handler, stdout_handler], level=logging.ERROR)
     app.run()
